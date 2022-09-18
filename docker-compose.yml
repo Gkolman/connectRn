@@ -13,6 +13,8 @@ services:
         MYSQL_USER: 'username'
         MYSQL_PASSWORD: 'password'
         MYSQL_ROOT_PASSWORD: 'password'
+        MYSQL_HOST: 'mysql'
+        MYSQL_PORT: 3306
     depends_on:
       - mysql
   mysql:
@@ -23,8 +25,6 @@ services:
         MYSQL_USER: 'username'
         MYSQL_PASSWORD: 'password'
         MYSQL_ROOT_PASSWORD: 'password'
-        MYSQL_PORT: 3307
-        MYSQL_HOST: 'mysql'
     ports:
       - '3307:3306'
     expose:
@@ -33,4 +33,4 @@ services:
       - my-db:/var/lib/mysql
 
 volumes:
-  my-db: {}
+  my-db: {} 
