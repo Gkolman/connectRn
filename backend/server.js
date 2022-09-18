@@ -5,8 +5,8 @@ const app = express()
 const cors = require("cors");
 const port = 3000
 const {utils} = require('./utils/utilityMethods')
-const fileUpload = require('express-fileupload')
 const {database} = require('./database')
+const fileUpload = require('express-fileupload')
 app.use(fileUpload())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json());
@@ -23,22 +23,22 @@ app.use('*', (req, res, next) => {
 
  
 app.post('/user/data', function (req, res) {
-  res.send(utils.parseUserData(req.body))
+  res.send(utils.parseUserData(req.body));
 });
 
 app.post('/image', function (req, res) {
-  const image = req.files.image
-  const imageName = image.name.split('.')[0]
+  const image = req.files.image;
+  const imageName = image.name.split('.')[0];
   utils.resizeImage(image, imageName)
   .then((newImage) => {
-    res.write(newImage, 'binary')
-    res.end()
+    res.write(newImage, 'binary');
+    res.end();
   })
   .catch((error) => {
-    res.send(error)
+    res.send(error);
   })
   .finally(() => {
-    utils.fileCleanUp(imageName)
+    utils.fileCleanUp(imageName);
   })
 });
 
@@ -62,7 +62,7 @@ app.delete('/users/:id', function (req, res) {
   .catch((error) => {res.send(error)})
 });
 
-app.get('/user/:id', function (req, res) {
+app.get('/users/:id', function (req, res) {
   const userId = req.params.id
   database.users.getUser(userId)
   .then((user) => {res.send(user)})

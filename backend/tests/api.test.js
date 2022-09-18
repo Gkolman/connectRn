@@ -9,7 +9,7 @@ describe("POST /user/data", () => {
       "date_of_birth": "1983-05-12",
       "created_on": 1642612034
     }
-  ]
+  ];
   const result =  [
     {
       "user_id": 1,

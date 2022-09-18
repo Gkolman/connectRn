@@ -1,7 +1,6 @@
 const { Sequelize, Model, DataTypes } = require('sequelize');
 
 require('dotenv').config();
-const PASS = process.env.DB_PASS || 'no password'
 const sequelize = new Sequelize(
     process.env.MYSQL_DATABASE, 
     process.env.MYSQL_USER, 
@@ -38,7 +37,7 @@ const User = sequelize.define('User',
         zipCode: { type: DataTypes.STRING, allowNull: false },
     },
     { 
-        timestamps: false 
+        timestamps: false
     }
 )
 
@@ -74,44 +73,44 @@ let database = {
     users: {
         getUser: async (userId) => {
             try {
-                return await User.findOne({ where: {id: userId}})
+                return await User.findOne({ where: {id: userId}});
             } catch (error) { throw error } 
         },
 
         getUsers: async () => {
             try {
-                return await User.findAll()
+                return await User.findAll();
             } catch (error) { throw error }    
         },
 
         addUser: async (data) => {
             try {
-                await User.create(data)
+                await User.create(data);
             } catch (error) { throw error }
         },
 
         deleteUser: async (userId) => {
             try {
-                await User.destroy({where: {id: userId}})
+                await User.destroy({where: {id: userId}});
             } catch (error) { throw error }     
         },
     },
     passwords : {
         getActivePasswords: async () => {
             try {
-                return await Password.findAll({ where: {currentlyActive: true}})
+                return await Password.findAll({ where: {currentlyActive: true}});
             } catch(error) { throw error }
         },
 
         getPasswords: async () => {
             try {
-                return await Password.findAll()
+                return await Password.findAll();
             } catch(error) { throw error }
         },
         
         addPassword: async (userId, password) => {
             try {
-               return await sequelize.transaction(async (t) => {
+                await sequelize.transaction(async (t) => {
                     await Password.update(
                         { currentlyActive : false },
                         { 
