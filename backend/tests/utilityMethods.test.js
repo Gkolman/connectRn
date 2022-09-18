@@ -4,20 +4,15 @@ import fs from 'fs'
 import Jimp from 'jimp'
 import sizeOf from 'buffer-image-size';
 
-// beforeEach(() => {
-    jest.mock('fs', () => ({
-        writeFileSync: jest.fn(),
-        readFileSync: jest.fn(),
-        unlinkSync: jest.fn()
-    }));
-    jest.mock('buffer-image-size');
-    jest.mock('Jimp', () => ({
-        read: jest.fn(),
-    }));
-// })
-
-// afterAll( () => {jest.clearAllMocks()} )
-
+jest.mock('fs', () => ({
+    writeFileSync: jest.fn(),
+    readFileSync: jest.fn(),
+    unlinkSync: jest.fn()
+}));
+jest.mock('buffer-image-size');
+jest.mock('Jimp', () => ({
+    read: jest.fn(),
+}));
 describe('helperFunctions: getNewImageDimensions', () => {
     it('maintains the aspect ratio', () => {
         const result = [256, 256]
@@ -72,7 +67,7 @@ describe('helperFunctions: parseEpochTime', () => {
         expect(helperFunctions.parseEpochTime(time)).toBe(result);
     });
 
-    it('rolls over to the new year month and or day if needed', () => {
+    it('rolls over to the previous year month and or day if needed', () => {
         let time = 1640995200 // january 1st 2022 at 12:00 AM GMT time 
         let result = '2021-12-31 19:00:00-05:00'
         expect(helperFunctions.parseEpochTime(time)).toBe(result);
