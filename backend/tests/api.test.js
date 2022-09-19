@@ -17,7 +17,7 @@ describe("POST /user/data", () => {
       "date_of_birth": "thursday",
       "created_on": "2022-01-19 12:07:14-05:00"  
     }
-  ]
+  ];
   it("gets the day of the week of the users birthday and parses the epoch time", async () => {
     const response = await request(baseURL).post("/user/data").send(userData);
     expect(response.body).toEqual(result);
@@ -37,7 +37,7 @@ describe("POST /users", () => {
       lastName: "Guzman",
       city: "Livermore",
       zipCode: "94550"
-    }
+    };
   it("creates a new user", async () => {
     const response = await request(baseURL).post("/users").send(userData);
     expect(response.status).toBe(200);
@@ -52,9 +52,16 @@ describe("Delete /users/:id", () => {
 });
 
 describe("GET /users/:id", () => {
+  let result = {
+    "firstName": "Gage",
+    "lastName": "Guzman",
+    "city": "Livermore",
+    "zipCode": "94550",
+    "id": 4
+  }
   it("creates the requested user", async () => {
-    const response = await request(baseURL).get("/users/2");
-    expect(response.body).toEqual({});
+    const response = await request(baseURL).get("/users/4");
+    expect(response.body).toEqual(result);
   });
 });
 

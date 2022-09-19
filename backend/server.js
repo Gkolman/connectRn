@@ -72,7 +72,7 @@ app.get('/users/:id', function (req, res) {
 app.post('/users/:id/password', function (req, res) {
   const userId = req.params.id
   const password = req.body.password
-  database.passwords.addPassword(userId, password )
+  database.passwords.addPassword(userId, password)
   .then(() => {res.end()})
   .catch((error) => {res.send(error)})
 });
