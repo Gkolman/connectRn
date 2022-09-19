@@ -114,7 +114,7 @@ let database = {
                     await Password.update(
                         { currentlyActive : false },
                         { 
-                            where : { userId : userId },
+                            where : { userId : userId, currentlyActive: true },
                             transaction: t
                         }
                     );
